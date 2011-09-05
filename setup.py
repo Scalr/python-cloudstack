@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cloudstack',
-    version='0.1',
+    version = open('cloudstack/version').read().strip(),
     author='Stefan Kjartansson',
     author_email='esteban.supreme@gmail.com',
     url='http://www.greenqloud.com',
