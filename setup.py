@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='cloudstack',
-    version = open('cloudstack/version').read().strip(),
+    version=open('cloudstack/version').read().strip(),
     author='Stefan Kjartansson',
     author_email='esteban.supreme@gmail.com',
     url='http://www.greenqloud.com',
-    description = 'Cloud.com Cloudstack API client',
+    description='Cloud.com Cloudstack API client',
     packages=find_packages(),
     install_requires=[
     ],

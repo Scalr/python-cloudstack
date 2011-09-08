@@ -117,6 +117,7 @@ class BaseClient(object):
             logger.debug('Executing command %s with arguments: %s' % (
                 command, str(params)))
 
+            '''
             if async:
                 logger.debug('Command is asynchronous')
                 jobid = self.process(command.lower() + 'response',
@@ -138,10 +139,11 @@ class BaseClient(object):
                 elif job.jobstatus == '2':
                     raise Exception('Asynchronous exception %s: %s.' % (
                         job.jobresultcode, job.jobresult))
+            '''
             return json.loads(self.caller.open(
                 self.url + '?' + urllib.urlencode(params)).read())
-        except urllib2.HTTPError as (errno):
-            raise CloudException(errno.code)
+        except urllib2.HTTPError, e:
+            raise CloudException(e)
 
     def process_async(self, command, kwargs, _class=DataObject):
         logger.debug(
@@ -165,7 +167,7 @@ class BaseClient(object):
         logger.debug('Processing result with selector: %s and data: %s' % (
             selector, str(data)))
         return _class(**dict([(str(k), v) for (k, v) in
-            data.get(selector).items()] +
+            data.get(selector).items()] + 
             [('api_client', self)]))
 
     def process_list(self, selector, data, _class=DataObject):

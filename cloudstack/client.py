@@ -131,6 +131,14 @@ class Client(BaseClient):
             'portForwardingServiceId': portForwardingServiceId,
             'protocol': protocol},
             _class)
+    
+    def createSecurityGroup(self, name, account=None, description=None,
+						domainId=None, _class=DataObject):
+        return self.process('createsecuritygroupresponse',
+			self.__execute__('createSecurityGroup',
+			{'name': name, 'account': account, 'description': description,
+			'domainId': domainId}),
+			_class)
 
     def createServiceOffering(self, name, displayText, cpuNumber, cpuSpeed,
         memory, storageType=None, offerHa=None, useVirtualNetwork=None,
@@ -155,6 +163,13 @@ class Client(BaseClient):
             {'volumeId': volumeId, 'schedule': schedule,
             'intervalType': intervalType, 'maxSnaps': maxSnaps,
             'timezone': timezone}),
+            _class)
+
+    def createSSHKeyPair(self, name, account=None, domainId=None,
+						_class=DataObject):
+        return self.process('createkeypairresponse',
+            self.__execute__('createSSHKeyPair',
+            {'name': name, 'account': account, 'domainId': domainId}),
             _class)
 
     def createStoragePool(self, name, zoneId, url, podId=None, clusterId=None,
@@ -261,6 +276,12 @@ class Client(BaseClient):
             {'id': id},
             _class)
 
+    def deleteSecurityGroup(self, id, _class=DataObject):
+        return self.process('deletesecuritygroupresponse',
+			self.__execute__('deleteSecurityGroup',
+			{'id': id}),
+			_class)
+
     def deleteServiceOffering(self, id, _class=DataObject):
         return self.process('deleteserviceofferingresponse',
             self.__execute__('deleteServiceOffering',
@@ -278,6 +299,12 @@ class Client(BaseClient):
             self.__execute__('deleteSnapshotPolicies',
             {'volumeId': volumeId, 'intervalType': intervalType}),
             _class)
+
+    def deleteSSHKeyPair(self, name, account=None, domainId=None, _class=DataObject):
+        return self.process('deletekeypairresponse',
+			self.__execute__('deleteSSHKeyPair',
+			{'name': name, 'account': account, 'domainId': domainId}),
+			_class)
 
     def deleteStoragePool(self, name, _class=DataObject):
         return self.process('deletestoragepoolresponse',
@@ -315,13 +342,16 @@ class Client(BaseClient):
             _class)
 
     def deployVirtualMachine(self, zoneId, serviceOfferingId, templateId,
-        diskOfferingId=None, displayName=None, group=None, userData=None,
+        diskOfferingId=None, displayName=None, group=None, 
+        keypair=None, securityGroupIds=None, networkIds=None, userData=None,
         _class=VirtualMachine):
-        return self.process_async('deployVirtualMachine',
+        return self.process('deployvirtualmachineresponse',
+			self.__execute__('deployVirtualMachine',
             {'zoneId': zoneId, 'serviceOfferingId': serviceOfferingId,
             'templateId': templateId, 'diskOfferingId': diskOfferingId,
             'displayName': displayName, 'group': group,
-            'userData': userData},
+            'keypair': keypair, 'securityGroupIds': securityGroupIds,
+            'networkIds': networkIds, 'userData': userData}),
             _class)
 
     def destroyVirtualMachine(self, id, _class=DataObject):
@@ -481,6 +511,13 @@ class Client(BaseClient):
             'virtualMachineId': virtualMachineId, 'publicIp': publicIp}),
             _class)
 
+    def listNetworks(self, account=None, domainId=None, id=None, _class=DataObject):
+        return self.process_list(
+            'listnetworksresponse>network', 
+            self.__execute__('listNetworks',
+            {'id': id, 'account': account, 'domainId': domainId}), 
+            _class)
+
     def listOsCategories(self, _class=DataObject):
         return self.process_list('listoscategoriesresponse>oscategory',
             self.__execute__('listOsCategories',
@@ -559,6 +596,14 @@ class Client(BaseClient):
                 'domainId': domainId, 'keyword': keyword}),
             _class)
 
+    def listSecurityGroups(self, id=None, account=None, domainId=None,
+                    keyword=None, _class=DataObject):
+        return self.process_list('listsecuritygroupsresponse>securitygroup',
+			self.__execute__('listSecurityGroups',
+			{'id': id, 'account': account, 'keyword': keyword,
+			'domainId': domainId}),
+			_class)
+
     def listServiceOfferings(self, id=None, name=None, virtualMachineId=None,
         keyword=None, _class=DataObject):
         return self.process_list(
@@ -582,6 +627,12 @@ class Client(BaseClient):
                 'volumeId': volumeId, 'intervalType': intervalType,
                 'snapshotType': snapshotType, 'keyword': keyword}),
             _class)
+
+    def listSSHKeyPairs(self, fingerprint=None, keyword=None, name=None, _class=DataObject):
+        return self.process_list('listsshkeypairsresponse>keypair',
+            self.__execute__('listSSHKeyPairs',
+            {'fingerprint': fingerprint, 'keyword': keyword, 'name': name}),
+            _class) 
 
     def listStoragePools(self, name=None, zoneId=None, ipAddress=None,
         path=None, keyword=None, podId=None, _class=DataObject):
