@@ -1,3 +1,4 @@
+
 import urllib2
 import urllib
 import hashlib
@@ -117,7 +118,7 @@ class BaseClient(object):
             logger.debug('Executing command %s with arguments: %s' % (
                 command, str(params)))
 
-            '''
+
             if async:
                 logger.debug('Command is asynchronous')
                 jobid = self.process(command.lower() + 'response',
@@ -129,17 +130,19 @@ class BaseClient(object):
 
                 logger.debug('Async Job Info: %s' % job)
 
-                while job.jobstatus == '0':
+                while job.jobstatus == 0:
                     time.sleep(2)
                     job = self.queryAsyncJobResult(jobid)
                     logger.debug('Async Job Info: %s' % job)
-                if job.jobstatus == '1':
+
+                if job.jobstatus == 1:
+                    logger.info('job status == 1')
                     return self.__execute__('queryAsyncJobResult',
                         {'jobid': jobid})
-                elif job.jobstatus == '2':
+                elif job.jobstatus == 2:
                     raise Exception('Asynchronous exception %s: %s.' % (
                         job.jobresultcode, job.jobresult))
-            '''
+
             return json.loads(self.caller.open(
                 self.url + '?' + urllib.urlencode(params)).read())
         except urllib2.HTTPError, e:
@@ -150,10 +153,14 @@ class BaseClient(object):
             'Processing asynchronous command %s with arguments: %s' % (
             command, str(kwargs)))
         data = self.__execute__(command, kwargs, True)
+        print data
         if data['queryasyncjobresultresponse']['jobresulttype'] == u'object':
-            obj = [v[0] for (k, v)
+            obj = data['queryasyncjobresultresponse']['jobresult'].values()[0]
+            '''
+            [v[0] for (k, v)
                 in data['queryasyncjobresultresponse'].items()
                 if not k.startswith('job')][0]
+            '''
             obj['api_client'] = self
 
             logging.debug('Creating %s with params: %s' % (

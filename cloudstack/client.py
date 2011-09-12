@@ -209,11 +209,11 @@ class Client(BaseClient):
             'startIp': startIp, 'endIp': endIp, 'vlan': vlan}),
             _class)
 
-    def createVolume(self, name, zoneId=None, diskOfferingId=None,
+    def createVolume(self, name, size=None, zoneId=None, diskOfferingId=None,
         snapshotId=None, _class=DataObject):
         return self.process_async('createVolume',
-            {'name': name, 'zoneId': zoneId, 'diskOfferingId': diskOfferingId,
-            'snapshotId': snapshotId},
+            {'name': name, 'size': size, 'zoneId': zoneId, 
+			'diskOfferingId': diskOfferingId, 'snapshotId': snapshotId},
             _class)
 
     def createZone(self, name, dns1, internaldns1, guestCidrAddress, dns2=None,
@@ -345,13 +345,12 @@ class Client(BaseClient):
         diskOfferingId=None, displayName=None, group=None, 
         keypair=None, securityGroupIds=None, networkIds=None, userData=None,
         _class=VirtualMachine):
-        return self.process('deployvirtualmachineresponse',
-			self.__execute__('deployVirtualMachine',
+        return self.process_async('deployVirtualMachine', 
             {'zoneId': zoneId, 'serviceOfferingId': serviceOfferingId,
             'templateId': templateId, 'diskOfferingId': diskOfferingId,
             'displayName': displayName, 'group': group,
             'keypair': keypair, 'securityGroupIds': securityGroupIds,
-            'networkIds': networkIds, 'userData': userData}),
+            'networkIds': networkIds, 'userData': userData},
             _class)
 
     def destroyVirtualMachine(self, id, _class=DataObject):
@@ -621,7 +620,7 @@ class Client(BaseClient):
 
     def listSnapshots(self, volumeId=None, intervalType=None,
         snapshotType=None, keyword=None, _class=DataObject):
-        return self.process_list('listsnapshotresponse>snapshot',
+        return self.process_list('listsnapshotsresponse>snapshot',
             self.__execute__('listSnapshots',
             {
                 'volumeId': volumeId, 'intervalType': intervalType,
@@ -717,10 +716,10 @@ class Client(BaseClient):
             _class)
 
     def listVolumes(self, id=None, name=None, zoneId=None,
-        virtualMachineId=None, keyword=None, _class=DataObject):
+        virtualMachineId=None, keyword=None, _type=None, _class=DataObject):
         return self.process_list('listvolumesresponse>volume',
             self.__execute__('listVolumes',
-            {'id': id, 'name': name, 'zoneId': zoneId,
+            {'id': id, 'name': name, 'zoneId': zoneId, 'type': _type,
             'virtualMachineId': virtualMachineId, 'keyword': keyword}),
             _class)
 
