@@ -20,7 +20,7 @@ class Client(BaseClient):
 			self.__execute__('addSecondaryStorage',
 			{'zoneid': zoneId, 'url': url}),
 			_class)
-	
+
 	def assignPortForwardingService(self, publicIp, virtualMachineId,
 		id=None, ids=None, _class=DataObject):
 		return self.process_async('assignPortForwardingService',
@@ -39,6 +39,7 @@ class Client(BaseClient):
 
 	def associateIpAddress(self, zoneId, account=None, domainId=None, networkId=None,
 		_class=DataObject):
+		'''associateIpAddress(zoneId, account=None, domainId=None, networkId=None)'''
 		return self.process('associateipaddressresponse',
 			self.__execute__('associateIpAddress',
 			{'zoneid': zoneId, 'account':account,
@@ -53,6 +54,7 @@ class Client(BaseClient):
 
 	def attachVolume(self, id, virtualMachineId, deviceId=None,
 		_class=DataObject):
+		'''attachVolume(id, virtualMachineId, deviceId=None)'''
 		return self.process_async('attachVolume',
 			{'id': id, 'virtualmachineid': virtualMachineId,'deviceid': deviceId},
 			_class)
@@ -70,6 +72,7 @@ class Client(BaseClient):
 			_class)
 
 	def copyIso(self, id, destZoneId, sourceZoneId, _class=DataObject):
+		'''copyIso(id, destZoneId, sourceZoneId)'''
 		return self.process_async('copyIso',
 			{'id': id, 'sourcezoneid': sourceZoneId,
 			'destzoneid': destZoneId},
@@ -122,6 +125,9 @@ class Client(BaseClient):
 	def createPortForwardingRule(self, ipAddressId, privatePort, protocol, publicPort, 
 		virtualMachineId, cidrList=None, openFireWall=None, privateEndPort=None,
 		publicEndPort=None, _class=DataObject):
+		'''createPortForwardingRule(ipAddressId, privatePort, protocol, publicPort, 
+		virtualMachineId, cidrList=None, openFireWall=None, privateEndPort=None,
+		publicEndPort=None)'''
 		return self.process('createportforwardingruleresponse',
 			self.__execute__('createPortForwardingRule',
 			{'ipaddressid': ipAddressId, 'publicport': publicPort,
@@ -171,6 +177,8 @@ class Client(BaseClient):
 
 	def createSnapshot(self, volumeId, account=None, domainId=None,
 		 policyId=None, _class=DataObject):
+		'''createSnapshot(volumeId, account=None, domainId=None,
+		 policyId=None)'''
 		return self.process_async('createSnapshot',
 			{'volumeid': volumeId, 'account':account, 'domainid':domainId,
 			'policyid':policyId},
@@ -178,6 +186,8 @@ class Client(BaseClient):
 
 	def createSnapshotPolicy(self, intervalType, maxSnaps, schedule, timezone,
 		volumeId, _class=DataObject):
+		'''createSnapshotPolicy(intervalType, maxSnaps, schedule, timezone,
+		volumeId)'''
 		return self.process('createsnapshotpolicysresponse',
 			self.__execute__('createSnapshotPolicy',
 			{'volumeid': volumeId, 'schedule': schedule,
@@ -187,6 +197,7 @@ class Client(BaseClient):
 
 	def createSSHKeyPair(self, name, account=None, domainId=None,
 						_class=DataObject):
+		'''createSSHKeyPair(name, account=None, domainId=None)'''
 		return self.process('createkeypairresponse',
 			self.__execute__('createSSHKeyPair',
 			{'name': name, 'account': account, 'domainid': domainId}),
@@ -239,11 +250,12 @@ class Client(BaseClient):
 
 	def createVolume(self, name, size=None, zoneId=None, diskOfferingId=None,
 		snapshotId=None, account=None, domainId=None, _class=DataObject):
+		'''createVolume(name, diskOfferingId=None, size=None, zoneId=None, 
+		diskOfferingId=None, snapshotId=None, account=None, domainId=None)'''
 		return self.process_async('createVolume',
 			{'name': name, 'size': size, 'zoneid': zoneId, 
 			'diskofferingid': diskOfferingId, 'snapshotid': snapshotId,
-			'account':account, 'domainid':domainId},
-			_class)
+			'account':account, 'domainid':domainId}, _class)
 
 	'''
 	def createZone(self, name, dns1, internaldns1, guestCidrAddress, dns2=None,
@@ -273,6 +285,7 @@ class Client(BaseClient):
 			_class)'''
 
 	def deleteIso(self, id, zoneId=None, _class=DataObject):
+		'''deleteIso(id, zoneId=None)'''
 		return self.process('deleteisoresponse',
 			self.__execute__('deleteIso',
 			{'id': id, 'zoneid': zoneId}),
@@ -293,6 +306,7 @@ class Client(BaseClient):
 			_class)'''
 
 	def deletePortForwardingRule(self, id, _class=DataObject):
+		'''deletePortForwardingRule(id)'''
 		return self.process('deleteportforwardingruleresponse',
 			self.__execute__('deletePortForwardingRule',
 			{'id': id}),
@@ -326,12 +340,14 @@ class Client(BaseClient):
 			_class)'''
 
 	def deleteSnapshot(self, id, _class=DataObject):
+		'''deleteSnapshot(id)'''
 		return self.process_async('deleteSnapshot',
 			{'id': id},
 			_class)
 
 	def deleteSnapshotPolicies(self, id=None, ids=None,
 		_class=DataObject):
+		'''deleteSnapshotPolicies(id=None, ids=None)'''
 		return self.process('deletesnapshotpoliciesresponse',
 			self.__execute__('deleteSnapshotPolicies',
 			{'id': id, 'ids': ids}),
@@ -371,6 +387,7 @@ class Client(BaseClient):
 			_class)'''
 
 	def deleteVolume(self, id, _class=DataObject):
+		'''deleteVolume(id)'''
 		return self.process('deletevolumeresponse',
 			self.__execute__('deleteVolume',
 			{'id': id}),
@@ -395,7 +412,7 @@ class Client(BaseClient):
 		keypair=None, securityGroupIds=None, networkIds=None, userData=None,
 		account=None, domainId=None, hostId=None, hypervisor=None, ipAddress=None,
 		ip2NetWorkList=None, keyboard=None, name=None, securityGroupNames=None,
-		size=None):
+		size=None)
 		'''
 		return self.process_async('deployVirtualMachine', 
 			{'zoneid': zoneId, 'serviceofferingid': serviceOfferingId,
@@ -415,11 +432,13 @@ class Client(BaseClient):
 			_class)
 
 	def detachIso(self, virtualMachineId, _class=DataObject):
+		'''detachIso(virtualMachineId)'''
 		return self.process_async('detachIso',
 			{'virtualmachineid': virtualMachineId},
 			_class)
 
 	def detachVolume(self, id=None, deviceId=None, virtualMachineId=None, _class=DataObject):
+		'''detachVolume(id=None, deviceId=None, virtualMachineId=None'''
 		return self.process_async('detachVolume',
 			{'id': id, 'deviceid':deviceId, 'virtualmachineid':virtualMachineId},
 			_class)
@@ -437,6 +456,7 @@ class Client(BaseClient):
 			_class)
 
 	def disassociateIpAddress(self, id, _class=DataObject):
+		'''disassociateIpAddress(id)'''
 		return self.process('disassociateipaddressresponse',
 			self.__execute__('disassociateIpAddress',
 			{'id': id}),
@@ -457,6 +477,7 @@ class Client(BaseClient):
 			_class)
 
 	def getCloudIdentifier(self, userId, _class=DataObject):
+		'''getCloudIdentifier(userId)'''
 		return self.process('getcloudidentifierresponse',
 			self.__execute__('getCloudIdentifier',
 			{'userid': userId}),
@@ -485,6 +506,8 @@ class Client(BaseClient):
 
 	def listAsyncJobs(self, account=None, domainId=None, keyword=None,
 		page=None, pageSize=None, startDate=None, _class=DataObject):
+		'''listAsyncJobs(account=None, domainId=None, keyword=None,
+		page=None, pageSize=None, startDate=None)'''
 		return self.process_list('listasyncjobsresponse>asyncjobs',
 			self.__execute__('listAsyncJobs',
 			{'account':account, 'domainid':domainId,'keyword':keyword,
@@ -516,31 +539,40 @@ class Client(BaseClient):
 
 	def listDiskOfferings(self, domainId=None,  id=None, name=None, keyword=None,
 		page=None, pageSize=None, _class=DataObject):
+		'''listDiskOfferings(domainId=None,  id=None, name=None, keyword=None,
+		page=None, pageSize=None)'''
 		return self.process_list('listdiskofferingsresponse>diskoffering',
 			self.__execute__('listDiskOfferings',
 			{'domainid':domainId, 'id': id, 'name': name, 'keyword': keyword,
 			'page':page, 'pagesize':pageSize}),
 			_class)
-	'''
+
 	def listDomainChildren(self, id=None, isRecursive=None, name=None, keyword=None,
 		page=None, pageSize=None, _class=DataObject):
+		'''listDomainChildren(self, id=None, isRecursive=None, name=None, keyword=None,
+		page=None, pageSize=None'''
 		return self.process_list('listdomainchildrenresponse>domain',
 			self.__execute__('listDomainChildren',
 			{'id': id, 'isrecursive':isRecursive, 'name': name, 'keyword': keyword,
 			 'page':page, 'pagesize':pageSize}),
 			_class)
-	
+
 	def listDomains(self, id=None, keyword=None, level=None, name=None, page=None,
 		pageSize=None, _class=DataObject):
+		'''listDomains(self, id=None, keyword=None, level=None, name=None, page=None,
+		pageSize=None)'''
 		return self.process_list('listdomainsresponse>domain',
 			self.__execute__('listDomains',
 			{'id': id, 'keyword': keyword, 'level':level, 'name': name, 'page':page,
 			'pagesize':pageSize}),
-			_class)'''
+			_class)
 
 	def listEvents(self, account=None, domainId=None, duration=None, endDate=None,
 		 entryTime=None, id=None, keyword=None, level=None, page=None, pageSize=None,
 		  startDate=None, type=None, _class=DataObject):
+		'''listEvents(account=None, domainId=None, duration=None, endDate=None,
+		 entryTime=None, id=None, keyword=None, level=None, page=None, pageSize=None,
+		  startDate=None, type=None)'''
 		return self.process_list('listeventsresponse>event',
 			self.__execute__('listEvents',
 			{'account':account, 'domainid':domainId, 'duration': duration, 'enddate': endDate,
@@ -561,6 +593,9 @@ class Client(BaseClient):
 	def listIsos(self, account=None, domainId=None, hypervisor=None, id=None,
 		isoFilter=None, isPublic=None, isReady=None, keyword=None,
 		name=None, page=None, pageSize=None, zoneId=None, _class=DataObject):
+		'''listIsos(account=None, domainId=None, hypervisor=None, id=None,
+		isoFilter=None, isPublic=None, isReady=None, keyword=None,
+		name=None, page=None, pageSize=None, zoneId=None)'''
 		return self.process_list('listisosresponse>iso',
 			self.__execute__('listIsos',
 			{
@@ -598,6 +633,9 @@ class Client(BaseClient):
 	def listNetworks(self, account=None, domainId=None, id=None, isDefault=None,
 		isShared=None, isSystem=None, keyword=None, page=None, pageSize=None,
 		trafficType=None, type=None, zoneId=None, _class=DataObject):
+		'''listNetworks(account=None, domainId=None, id=None, isDefault=None,
+		isShared=None, isSystem=None, keyword=None, page=None, pageSize=None,
+		trafficType=None, type=None, zoneId=None)'''
 		return self.process_list(
 			'listnetworksresponse>network', 
 			self.__execute__('listNetworks',
@@ -608,6 +646,7 @@ class Client(BaseClient):
 
 	def listOsCategories(self, id=None, keyword=None, page=None, pageSize=None,
 		_class=DataObject):
+		'''listOsCategories(id=None, keyword=None, page=None, pageSize=None)'''
 		return self.process_list('listoscategoriesresponse>oscategory',
 			self.__execute__('listOsCategories',
 			{'id':id, 'keyword':keyword, 'page':page, 'pagesize':pageSize}),
@@ -615,6 +654,8 @@ class Client(BaseClient):
 
 	def listOsTypes(self, id=None, keyword=None, osCategoryId=None, page=None,
 		pageSize=None, _class=DataObject):
+		'''listOsTypes(id=None, keyword=None, osCategoryId=None, page=None,
+		pageSize=None)'''
 		return self.process_list('listostypesresponse>ostype',
 			self.__execute__('listOsTypes',
 			{'id':id, 'keyword':keyword, 'oscategoryid':osCategoryId, 'page':page,
@@ -631,6 +672,8 @@ class Client(BaseClient):
 
 	def listPortForwardingRules(self, account=None, domainId=None, id=None,
 		 ipAddressId=None, keyword=None, page=None, pageSize=None, _class=DataObject):
+		'''listPortForwardingRules(account=None, domainId=None, id=None,
+		 ipAddressId=None, keyword=None, page=None, pageSize=None)'''
 		return self.process_list(
 			'listportforwardingrulesresponse>portforwardingrule',
 			self.__execute__('listPortForwardingRules',
@@ -669,6 +712,9 @@ class Client(BaseClient):
 		forLoadBalancing=None, forVirtualNetwork=None, id=None, ipAddress=None,
 		keyword=None, page=None, pageSize=None, vlanId=None, zoneId=None,
 		_class=DataObject):
+		'''listPublicIpAddresses(account=None, allocatedOnly=None, domainId=None,
+		forLoadBalancing=None, forVirtualNetwork=None, id=None, ipAddress=None,
+		keyword=None, page=None, pageSize=None, vlanId=None, zoneId=None)'''
 		return self.process_list(
 			'listpublicipaddressesresponse>publicipaddress',
 			self.__execute__('listPublicIpAddresses',
@@ -679,16 +725,21 @@ class Client(BaseClient):
 
 	def listResourceLimits(self, account=None,  domainId=None, id=None, keyword=None,
 		page=None, pageSize=None, resourceType=None, _class=DataObject):
+		'''listResourceLimits(account=None,  domainId=None, id=None, keyword=None,
+		page=None, pageSize=None, resourceType=None)'''
 		return self.process_list('listresourcelimitsresponse>resourcelimit',
 			self.__execute__('listResourceLimits',
 			{'account': account, 'domainid': domainId, 'id': id, 'keyword':keyword,
 			'page':page, 'pagesize':pageSize, 'resourcetype': resourceType}),
 			_class)
 
-
+	#TODO: need review
 	def listRouters(self, account=None, domainId=None, hostId=None, id=None,keyword=None,
 		name=None, networkId=None, page=None, pageSize=None, podId=None, state=None,
 		zoneId=None, _class=DataObject):
+		'''listRouters(account=None, domainId=None, hostId=None, id=None,keyword=None,
+		name=None, networkId=None, page=None, pageSize=None, podId=None, state=None,
+		zoneId=None)'''
 		return self.process_list('listroutersresponse>router',
 			self.__execute__('listRouters',
 			{'account': account, 'domainid': domainId, 'hostid': hostId, 'id': id,
@@ -699,6 +750,8 @@ class Client(BaseClient):
 	def listSecurityGroups(self, account=None,  domainId=None, id=None, keyword=None,
 		page=None, pageSize=None, securityGroupName=None, virtualMachineId=None,
 		_class=DataObject):
+		'''listSecurityGroups(self, account=None,  domainId=None, id=None, keyword=None,
+		page=None, pageSize=None, securityGroupName=None, virtualMachineId=None)'''
 		return self.process_list('listsecuritygroupsresponse>securitygroup',
 			self.__execute__('listSecurityGroups',
 			{'account': account, 'domainid': domainId, 'id': id, 'keyword': keyword,
@@ -708,6 +761,8 @@ class Client(BaseClient):
 	def listServiceOfferings(self, domainId=None, id=None, isSystem=None, keyword=None,
 		name=None, page=None, pageSize=None, systemVMType=None, virtualMachineId=None,
 		 _class=DataObject):
+		'''listServiceOfferings(domainId=None, id=None, isSystem=None, keyword=None,
+		name=None, page=None, pageSize=None, systemVMType=None, virtualMachineId=None)'''
 		return self.process_list(
 			'listserviceofferingsresponse>serviceoffering',
 			self.__execute__('listServiceOfferings',
@@ -718,6 +773,8 @@ class Client(BaseClient):
 
 	def listSnapshotPolicies(self, volumeId, account=None,  domainId=None, keyword=None,
 		page=None, pageSize=None,_class=DataObject):
+		'''listSnapshotPolicies(self, volumeId, account=None,  domainId=None, keyword=None,
+		page=None, pageSize=None)'''
 		return self.process_list('listsnapshotpoliciesresponse>snapshotpolicy',
 			self.__execute__('listSnapshotPolicies',
 			{'volumeid': volumeId, 'account': account, 'domainid': domainId,
@@ -726,6 +783,9 @@ class Client(BaseClient):
 	def listSnapshots(self, account=None, domainId=None, id=None, intervalType=None,
 		isRecursive=None, keyword=None, name=None, page=None, pageSize=None,
 		snapshotType=None, volumeId=None, _class=DataObject):
+		'''listSnapshots(account=None, domainId=None, id=None, intervalType=None,
+		isRecursive=None, keyword=None, name=None, page=None, pageSize=None,
+		snapshotType=None, volumeId=None)'''
 		return self.process_list('listsnapshotsresponse>snapshot',
 			self.__execute__('listSnapshots',
 			{'account': account, 'domainid': domainId, 'id': id, 'intervaltype':
@@ -766,7 +826,7 @@ class Client(BaseClient):
 			_class)'''
 
 	def listTemplatePermissions(self, id, account=None, domainId=None, _class=DataObject):
-		'''listTemplatePermissions(self, id, account=None, domainId=None)'''
+		'''listTemplatePermissions(id, account=None, domainId=None)'''
 		return self.process_list(
 			'listtemplatepermissionsresponse>templatepermission',
 			self.__execute__('listTemplatePermissions',
@@ -774,13 +834,14 @@ class Client(BaseClient):
 			_class)
 
 		
-	#TODO:not required:
 	def listCommunityTemplates(self, id=None, name=None, keyword=None,
 		_class=DataObject):
+		'''listCommunityTemplates(id=None, name=None, keyword=None)'''
 		return self.listTemplates('community', id=id, name=name, keyword=keyword)
 
 	def listFeaturedTemplates(self, id=None, name=None, keyword=None,
 		_class=DataObject):
+		'''listFeaturedTemplates(id=None, name=None, keyword=None)'''
 		return self.listTemplates('featured', id=id, name=name, keyword=keyword)
 
 
@@ -804,22 +865,28 @@ class Client(BaseClient):
 			{
 				'startDate': startDate, 'endDate': endDate, 'account': account,
 				'domainid': domainId}),
-			_class)
-
+			_class)'''
+	#TODO:review listUsers
 	def listUsers(self, account=None, accountType=None, domainId=None,
 		id=None, keyword=None, page=None, pageSize=None, state=None, username=None,
 		_class=User):
+		'''listUsers(account=None, accountType=None, domainId=None,
+		id=None, keyword=None, page=None, pageSize=None, state=None,username=None)'''
 		return self.process_list('listusersresponse>user',
 			self.__execute__('listUsers',
 			{'account': account, 'accounttype':accountType, 'domainid': domainId,
 			'id': id, 'keyword': keyword, 'page':page, 'pagesize':pageSize,
 			'state': state, 'username': username}),
-			_class)'''
+			_class)
 
 	def listVirtualMachines(self, account=None, domainId=None, forVirtualNetwork=None,
 		groupId=None, hostId=None, hypervisor=None, id=None, isRecursive=None,
 		keyword=None, name=None, networkId=None, page=None, pageSize=None, podId=None,
 		state=None, storageId=None, zoneId=None, _class=VirtualMachine):
+		'''listVirtualMachines(account=None, domainId=None, forVirtualNetwork=None,
+		groupId=None, hostId=None, hypervisor=None, id=None, isRecursive=None,
+		keyword=None, name=None, networkId=None, page=None, pageSize=None, podId=None,
+		state=None, storageId=None, zoneId=None)'''
 		return self.process_list('listvirtualmachinesresponse>virtualmachine',
 			self.__execute__('listVirtualMachines',
 			{'account': account, 'domainid': domainId,
@@ -831,6 +898,7 @@ class Client(BaseClient):
 			_class)
 
 	def getVirtualMachineById(self, id):
+		'''getVirtualMachineById(id)'''
 		return [i for i in self.listVirtualMachines()
 			if i.id == id][0]
 			
@@ -847,6 +915,9 @@ class Client(BaseClient):
 	def listVolumes(self, account=None, domainId=None, hostId=None, id=None,
 		isRecursive=None, keyword=None, name=None, page=None, pageSize=None,
 		podId=None, type=None, virtualMachineId=None, zoneId=None, _class=DataObject):
+		'''listVolumes(account=None, domainId=None, hostId=None, id=None,
+		isRecursive=None, keyword=None, name=None, page=None, pageSize=None,
+		podId=None, type=None, virtualMachineId=None, zoneId=None)'''
 		return self.process_list('listvolumesresponse>volume',
 			self.__execute__('listVolumes',
 			{'account': account, 'domainid': domainId, 'hsotid': hostId, 'id': id,
@@ -857,6 +928,8 @@ class Client(BaseClient):
 
 	def listZones(self, account=None, domainId=None, id=None, keyword=None, page=None,
 		pageSize=None, _class=DataObject):
+		'''listZones(account=None, domainId=None, id=None, keyword=None, page=None,
+		pageSize=None)'''
 		return self.process_list('listzonesresponse>zone',
 			self.__execute__('listZones',
 			{'account': account, 'domainid': domainId, 'id': id, 'keyword': keyword,
@@ -877,6 +950,7 @@ class Client(BaseClient):
 			_class)'''
 
 	def login(self, username, password, domain=None, _class=DataObject):
+		'''login(username, password, domain=None)'''
 		return self.process('loginresponse',
 			self.__execute__('login',
 			{'username': username, 'password': password,
@@ -884,6 +958,7 @@ class Client(BaseClient):
 			_class)
 
 	def logout(self, _class=DataObject):
+		''' logout()'''
 		return self.process('logoutresponse',
 			self.__execute__('logout',
 			{}),
@@ -895,12 +970,14 @@ class Client(BaseClient):
 			_class)'''
 
 	def queryAsyncJobResult(self, jobId, _class=DataObject):
+		'''queryAsyncJobResult(jobId)'''
 		return self.process('queryasyncjobresultresponse',
 			self.__execute__('queryAsyncJobResult',
 			{'jobid': jobId}),
 			_class)
 		
 	def rebootRouter(self, id, _class=DataObject):
+		'''rebootRouter(id)'''
 		return self.process_async('rebootRouter',
 			{'id': id},
 			_class)
@@ -933,6 +1010,9 @@ class Client(BaseClient):
 	def registerIso(self, displayText, name,  url, zoneId,	account=None,
 		bootable=None, domainId=None, isExtractable=None,isFeatured=None,
 		isPublic=None, osTypeId=None, _class=DataObject):
+		'''registerIso(displayText, name,  url, zoneId,	account=None,
+		bootable=None, domainId=None, isExtractable=None,isFeatured=None,
+		isPublic=None, osTypeId=None)'''
 		return self.process('registerisoresponse',
 			self.__execute__('registerIso',
 			{'displaytext': displayText, 'name': name, 'url': url, 'zoneid': zoneId,
@@ -987,6 +1067,7 @@ class Client(BaseClient):
 			_class)
 
 	def startRouter(self, id, _class=DataObject):
+		'''startRouter(id)'''
 		return self.process_async('startRouter',
 			{'id': id},
 			_class)
@@ -1004,6 +1085,7 @@ class Client(BaseClient):
 			_class)
 
 	def stopRouter(self, id, forced=None, _class=DataObject):
+		'''stopRouter(id, forced=None)'''
 		return self.process_async('stopRouter',
 			{'id': id, 'forced':forced},
 			_class)
@@ -1054,6 +1136,8 @@ class Client(BaseClient):
 
 	def updateIso(self, id, bootable=None, displayText=None, format=None, name=None,
 		osTypeId=None, passwordEnabled=None, _class=DataObject):
+		'''updateIso(id, bootable=None, displayText=None, format=None, name=None,
+		osTypeId=None, passwordEnabled=None)'''
 		return self.process('updateisoresponse',
 			self.__execute__('updateIso',
 			{'id': id, 'bootable': bootable, 'displaytext': displayText, 'format':format,
@@ -1080,6 +1164,8 @@ class Client(BaseClient):
 
 	def updateResourceLimit(self, resourceType, account=None, domainId=None,
 		max=None, _class=DataObject):
+		'''updateResourceLimit(resourceType, account=None, domainId=None,
+		max=None)'''
 		return self.process('updateresourcelimitresponse',
 			self.__execute__('updateResourceLimit',
 			{'resourcetype': resourceType, 'account': account,
@@ -1113,6 +1199,8 @@ class Client(BaseClient):
 
 	def updateTemplatePermissions(self, id, accounts=None, isExtractable=None,
 		isFeatured=None, isPublic=None,	op=None, _class=DataObject):
+		'''updateTemplatePermissions(id, accounts=None, isExtractable=None,
+		isFeatured=None, isPublic=None,	op=None)'''
 		return self.process('updatetemplatepermissionsresponse',
 			self.__execute__('updateTemplatePermissions',
 			{'id': id, 'accounts': accounts, 'isextractable':isExtractable,
@@ -1182,6 +1270,7 @@ class Client(BaseClient):
 
 	def registerSSHKeyPair(self, name, publicKey, account=None, domain=None,
 		_class=DataObject):
+		'''registerSSHKeyPair(name, publicKey, account=None, domain=None)'''
 		return self.process('registersshkeypairresponse',
 			self.__execute__('registerSSHKeyPair',
 			{'name':name, 'publickey':publicKey, 'account':account, 'domain':domain}),
@@ -1189,17 +1278,20 @@ class Client(BaseClient):
 		
 	def updateLoadBalancerRule(self, id, algorithm=None, description=None, name=None,
 		_class=DataObject):
+		'''updateLoadBalancerRule(id, algorithm=None, description=None, name=None)'''
 		return self.process_async('updateLoadBalancerRule',
 			{'id': id, 'algorithm':algorithm, 'description':description, 'name':name},
 			_class)
 	
 	def listHypervisors(self, zoneId=None, _class=DataObject):
+		'''listHypervisors(zoneId=None)'''
 		return self.process('listhypervisorsresponse',
 			self.__execute__('listHypervisors',
 			{'zoneid':zoneId}),
 			_class)
 
 	def extractTemplate(self, id, mode, zoneId, url=None, _class=DataObject):
+		'''extractTemplate(id, mode, zoneId, url=None)'''
 		return self.process_async('extractTemplate',
 			{'id': id, 'mode':mode, 'zoneid':zoneId, 'url':url},
 			_class)
@@ -1207,6 +1299,8 @@ class Client(BaseClient):
 	
 	def updateIsoPermissions(self, id, accounts=None, isExtractable=None,
 		isFeatured=None, isPublic=None, op=None, _class=DataObject):
+		'''updateIsoPermissions(id, accounts=None, isExtractable=None,
+		isFeatured=None, isPublic=None, op=None)'''
 		return self.process('updateisopermissionsresponse',
 			self.__execute__('updateIsoPermissions',
 			{'id':id, 'accounts':accounts, 'isextractable':isExtractable,
@@ -1214,18 +1308,22 @@ class Client(BaseClient):
 			_class)
 		
 	def listIsoPermissions(self, id, account=None, domainId=None, _class=DataObject):
+		'''listIsoPermissions(id, account=None, domainId=None)'''
 		return self.process('listIsoPermissionsresponse',
 			self.__execute__('listIsoPermissions',
 			{'id':id, 'accounts':account, 'domainid':domainId}),
 			_class)
 		
 	def extractIso(self, id, mode, zoneId, url=None,  _class=DataObject):
+		'''extractIso(self, id, mode, zoneId, url=None)'''
 		return self.process_async('extractIso',
 			{'id': id, 'mode':mode, 'zoneid':zoneId, 'url':url},
 			_class)
 
 	def createFirewallRule(self, ipaddressId, protocol, cidrList=None, endPort=None,
 		icmpCode=None, icmpType=None, startPort=None, _class=DataObject):
+		'''createFirewallRule(ipaddressId, protocol, cidrList=None, endPort=None,
+		icmpCode=None, icmpType=None, startPort=None)'''
 		return self.process_async('createFirewallRule',
 			{'ipaddressid': ipaddressId, 'protocol':protocol, 'cidrList':cidrList,
 			'endport':endPort, 'icmpcode':icmpCode, 'icmptype':icmpType, 
@@ -1233,31 +1331,36 @@ class Client(BaseClient):
 			_class)
 	
 	def deleteFirewallRule(self, id, _class=DataObject):
+		'''deleteFirewallRule(id)'''
 		return self.process_async('deleteFirewallRule',
 			{'id':id},
 			_class)
 	
 	def listFirewallRules(self, account=None, domainId=None, id=None, ipaddressId=None, 
 		_class=DataObject):
+		'''listFirewallRules(self, account=None, domainId=None, id=None, ipaddressId=None)'''
 		return self.process('listfirewallrulesresponse',
 			self.__execute__('listFirewallRules',
 			{'account':account, 'domainid':domainId, 'id':id, 'ipaddressid':ipaddressId}),
 			_class)
 
-#InstanceGroup
+	#InstanceGroup
 	def createInstanceGroup(self, name, account=None, domainId=None, _class=DataObject):
+		'''createInstanceGroup(self, name, account=None, domainId=None)'''
 		return self.process('createinstancegroupresponse',
 			self.__execute__('createInstanceGroup',
 			{'name':name, 'account':account, 'domainid':domainId}),
 			_class)
 		
 	def deleteInstanceGroup(self, id, _class=DataObject):
+		'''deleteInstanceGroup(id)'''
 		return self.process('deleteinstancegroupresponse',
 			self.__execute__('deleteInstanceGroup',
 			{'id':id}),
 			_class)
 		
 	def updateInstanceGroup(self, id, name=None, _class=DataObject):
+		'''updateInstanceGroup(id, name=None)'''
 		return self.process('updateinstancegroupresponse',
 			self.__execute__('updateInstanceGroup',
 			{'id':id, 'name':name}),
@@ -1265,6 +1368,8 @@ class Client(BaseClient):
 		
 	def listInstanceGroups(self, account=None, domainId=None, id=None, keyword=None,
 		name=None, page=None, pagesize=None, _class=DataObject):
+		'''listInstanceGroups(account=None, domainId=None, id=None, keyword=None,
+		name=None, page=None, pagesize=None)'''
 		return self.process('listinstancegroupsresponse',
 			self.__execute__('listInstanceGroups',
 			{'account':account, 'domainid':domainId, 'id':id, 'keyword':keyword,
@@ -1275,6 +1380,9 @@ class Client(BaseClient):
 		id=None, isDefault=None, isShared=None, keyword=None, name=None, page=None,
 		pagesize=None, specifyvlan=None, traffictype=None, zoneId=None,
 		_class=DataObject):
+		'''listNetworkOfferings(availability=None, displayText=None, guestIpType=None,
+		id=None, isDefault=None, isShared=None, keyword=None, name=None, page=None,
+		pagesize=None, specifyvlan=None, traffictype=None, zoneId=None)'''
 		return self.process('listnetworkofferingsresponse',
 			self.__execute__('listNetworkOfferings',
 			{'availability':availability, 'displaytext':displayText,
@@ -1285,24 +1393,34 @@ class Client(BaseClient):
 			_class)
 		
 	def extractVolume(self, id, mode, zoneId, url=None, _class=DataObject):
+		'''extractVolume(self, id, mode, zoneId, url=None)'''
+		#TODO: Asynchronous exception 530: {u'errorcode': 530, u'errortext'
+		#: u'Internal error executing command, please contact your system administrator'}
+
 		return self.process_async('extractVolume',
 			{'id':id, 'mode':mode, 'zoneid':zoneId, 'url':url},
 			_class)
-#VPN
+
+	#VPN
 	def createRemoteAccessVpn(self, publicIpId, account=None, domainId=None, ipRange=None,
 		openFirewall=None, _class=DataObject):
+		'''createRemoteAccessVpn(publicIpId, account=None, domainId=None, ipRange=None,
+		openFirewall=None)'''
 		return self.process_async('createRemoteAccessVpn',
 			{'publicipid':publicIpId, 'account':account, 'domainid':domainId,
 			'iprange':ipRange, 'openfirewall':openFirewall},
 			_class)
-		
+	
 	def deleteRemoteAccessVpn(self, publicIpId, _class=DataObject):
+		'''deleteRemoteAccessVpn(publicIpId)'''
 		return self.process_async('deleteRemoteAccessVpn',
 			{'publicipid':publicIpId},
 			_class)
 		
 	def listRemoteAccessVpns(self, publicIpId, account=None, domainId=None, keyword=None,
 		page=None, pagesize=None, _class=DataObject):
+		'''listRemoteAccessVpns(publicIpId, account=None, domainId=None, keyword=None,
+		page=None, pagesize=None)'''
 		return self.process('listremoteaccessvpnsresponse',
 			self.__execute__('listRemoteAccessVpns',
 			{'publicipid':publicIpId, 'account':account, 'domainid':domainId,
@@ -1311,54 +1429,67 @@ class Client(BaseClient):
 
 	def addVpnUser(self, password, username, account=None, domainId=None,
 		_class=DataObject):
+		'''addVpnUser(password, username, account=None, domainId=None)'''
 		return self.process_async('addVpnUser',
 			{'password':password, 'username':username, 'account':account,
 			'domainid':domainId},
 			_class)
 		
 	def removeVpnUser(self, username, account=None, domainId=None, _class=DataObject):
+		'''removeVpnUser(username, account=None, domainId=None)'''
 		return self.process_async('removeVpnUser',
 			{'username':username, 'account':account, 'domainid':domainId},
 			_class)
 		
 	def listVpnUsers(self, account=None, domainId=None, id=None, keyword=None, page=None,
 		pagesize=None, username=None, _class=DataObject):
+		'''listVpnUsers(account=None, domainId=None, id=None, keyword=None, page=None,
+		pagesize=None, username=None)'''
 		return self.process('listvpnusersresponse',
 			self.__execute__('listVpnUsers',
 			{'account':account, 'domainid':domainId, 'id':id, 'keyword':keyword,
 			'page':page, 'pagesize':pagesize, 'username':username}),
 			_class)
-#NAT
+	#NAT
 	def enableStaticNat(self, ipaddressId, virtualmachineId, _class=DataObject):
+		'''enableStaticNat(ipaddressId, virtualmachineId)'''
 		return self.process_async('enableStaticNat',
 			{'ipaddressid':ipaddressId, 'virtualmachineid':virtualmachineId},
 			_class)
 
 	def createIpForwardingRule(self, ipaddressId, protocol, startPort, cidrList=None, endPort=None,
 		openFirewall=None, _class=DataObject):
+		'''createIpForwardingRule(ipaddressId, protocol, startPort, cidrList=None, endPort=None,
+		openFirewall=None)'''
 		return self.process_async('createIpForwardingRule',
 			{'ipaddressid':ipaddressId, 'protocol':protocol, 'startport':startPort,
 			'cidrlist':cidrList, 'endport':endPort, 'openfirewall':openFirewall},
 			_class)
 		
 	def deleteIpForwardingRule(self, id, _class=DataObject):
+		'''deleteIpForwardingRule(id )'''
 		return self.process_async('deleteIpForwardingRule',
 			{'id':id},
 			_class)
 		
-	def listIpForwardingRules(self, account, domainId=None, id=None, ipaddressId=None,
+	def listIpForwardingRules(self, account=None, domainId=None, id=None, ipaddressId=None,
 		keyword=None, page=None, pagesize=None, virtualmachineId=None, _class=DataObject):
+		'''listIpForwardingRules(account, domainId=None, id=None, ipaddressId=None,
+		keyword=None, page=None, pagesize=None, virtualmachineId=None)'''
 		return self.process('listipforwardingrulesresponse',
 			self.__execute__('listIpForwardingRules',
 			{'account':account, 'domainid':domainId, 'id':id, 'ipaddressid':ipaddressId,
 			'keyword':keyword, 'page':page, 'pagesize':pagesize,
 			'virtualmachineid':virtualmachineId}),
 			_class)
-#Network
+	#Network
 	def createNetwork(self, displayText, name, networkOfferingId, zoneId, account=None,
 		domainId=None, endIp=None, gateWay=None, isDefault=None, isShared=None,
 		netmask=None, networkDomain=None, startIp=None, tags=None, vlan=None,
 		_class=DataObject):
+		'''createNetwork(displayText, name, networkOfferingId, zoneId, account=None,
+		domainId=None, endIp=None, gateWay=None, isDefault=None, isShared=None,
+		netmask=None, networkDomain=None, startIp=None, tags=None, vlan=None)'''
 		return self.process('createnetworkresponse',
 			self.__execute__('createNetwork',
 			{'displaytext':displayText, 'name':name,
@@ -1369,11 +1500,13 @@ class Client(BaseClient):
 			_class)
 		
 	def deleteNetwork(self, id, _class=DataObject):
+		'''deleteNetwork(id)'''
 		return self.process_async('deleteNetwork',
 			{'id':id},
 			_class)
 		
 	def restartNetwork(self, _class=DataObject):
+		'''restartNetwork()'''
 		return self.process('restartnetworkresponse',
 			self.__execute__('restartNetwork',
 			{'id':id}),
@@ -1381,19 +1514,29 @@ class Client(BaseClient):
 		
 	def updateNetwork(self, id, displayText=None, name=None, networkDomain=None,
 		tags=None, _class=DataObject):
+		'''updateNetwork(id, displayText=None, name=None, networkDomain=None,
+		tags=None)'''
 		return self.process_async('updateNetwork',
 			{'id':id, 'displaytext':displayText, 'name':name,
 			'networkdomain':networkDomain, 'tags':tags},
 			_class)
 
 	def listCapabilities(self, _class=DataObject):
+		'''listCapabilities()'''
 		return self.process('listcapabilitiesresponse',
 			self.__execute__('listCapabilities',
 			{}),
 			_class)
-#event	
+	#Events
 	def listEventTypes(self, _class=DataObject):
+		'''listEventTypes()'''
 		return self.process('listeventtypesresponse',
 			self.__execute__('listEventTypes',
 			{}),
+			_class)
+
+	def updateResourceCount(self, domainId, account=None, resourceType=None, _class=DataObject):
+		return self.process('listeventtypesresponse',
+			self.__execute__('listEventTypes',
+			{'domainid':domainId, 'account':account, 'resourcetype':resourceType}),
 			_class)
