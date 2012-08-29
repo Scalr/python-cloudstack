@@ -127,7 +127,12 @@ class BaseClient(object):
                     self.url + '?' + urllib.urlencode(params)).read())).jobid
                 logger.debug('Async jobid: %d' % jobid)
 
-                job = self.queryAsyncJobResult(jobid)
+                while True: 
+                    try:
+                        job = self.queryAsyncJobResult(jobid)
+                        break
+                    except (socket.error, IOError):
+                        logger.debug('Caught: %s', sys.exc_info()[1])
 
                 logger.debug('Async Job Info: %s' % job)
 
