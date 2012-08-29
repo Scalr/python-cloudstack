@@ -12,6 +12,7 @@ import base64
 
 from cloud_exceptions import CloudException
 from dataobject import *
+import sys
 
 
 __all__ = ['BaseClient', 'DataObject', 'CloudException']
@@ -132,11 +133,13 @@ class BaseClient(object):
 
                 while job.jobstatus == 0:
                     time.sleep(2)
-                    job = self.queryAsyncJobResult(jobid)
-                    logger.debug('Async Job Info: %s' % job)
+                    try:
+                        job = self.queryAsyncJobResult(jobid)
+                        logger.debug('Async Job Info: %s' % job)
+                    except (socket.error, IOError):
+                        logger.debug('Caught: %s', sys.exc_info()[1])
 
                 if job.jobstatus == 1:
-                    logger.info('job status == 1')
                     return self.__execute__('queryAsyncJobResult',
                         {'jobid': jobid})
                 elif job.jobstatus == 2:
@@ -153,7 +156,6 @@ class BaseClient(object):
             'Processing asynchronous command %s with arguments: %s' % (
             command, str(kwargs)))
         data = self.__execute__(command, kwargs, True)
-        print data
         if data['queryasyncjobresultresponse']['jobresulttype'] == u'object':
             obj = data['queryasyncjobresultresponse']['jobresult'].values()[0]
             '''
