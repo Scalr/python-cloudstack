@@ -125,7 +125,7 @@ class BaseClient(object):
                 jobid = self.process(command.lower() + 'response',
                     json.loads(self.caller.open(
                     self.url + '?' + urllib.urlencode(params)).read())).jobid
-                logger.debug('Async jobid: %d' % jobid)
+                logger.debug('Async jobid: %s' % jobid)
 
                 while True: 
                     try:
