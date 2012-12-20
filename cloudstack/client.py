@@ -537,6 +537,13 @@ class Client(BaseClient):
 			{'name': name, 'category': category, 'keyword': keyword}),
 			_class)'''
 
+	def listAvailableProductTypes(self, _class=DataObject):
+		return self.process_list('listavailableproducttypesresponse>producttypes',
+			self.__execute__('listAvailableProductTypes',
+			{}),
+			_class)
+
+
 	def listDiskOfferings(self, domainId=None,  id=None, name=None, keyword=None,
 		page=None, pageSize=None, _class=DataObject):
 		'''listDiskOfferings(domainId=None,  id=None, name=None, keyword=None,
