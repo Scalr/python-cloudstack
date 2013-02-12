@@ -20,5 +20,3 @@ setup(
     'Topic :: Software Development',
     'Topic :: Cloud Computing'
 ],)
-
-
