@@ -14,6 +14,7 @@ Summary:        Cloud.com Cloudstack Client
 Group:          System Environment/Libraries
 License:        MIT
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source:         %{pkgname}-%{version}.tar.gz
 
 %if 0%{?rhel} >= 4 && 0%{?rhel} <= 5
 Requires:       python26
