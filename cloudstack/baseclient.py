@@ -137,12 +137,12 @@ class BaseClient(object):
                 logger.debug('Async Job Info: %s' % job)
 
                 while job.jobstatus == 0:
-                    time.sleep(2)
+                    time.sleep(5)
                     try:
                         job = self.queryAsyncJobResult(jobid)
                         logger.debug('Async Job Info: %s' % job)
                     except (socket.error, IOError):
-                        logger.debug('Caught: %s', sys.exc_info()[1])
+                        logger.debug('Caught: %s', sys.exc_info()[1]) 
 
                 if job.jobstatus == 1:
                     return self.__execute__('queryAsyncJobResult',
