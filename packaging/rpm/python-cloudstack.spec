@@ -28,7 +28,7 @@ BuildArch:      noarch
 Provides a simple python client to cloud.com's api.
 
 %prep
-%setup -q -n httplib2-%{version}
+%setup -q -n %{pkgname}-%{version}
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" python setup.py build
