@@ -1,0 +1,12 @@
+# Scalrizr distutils distribution files
+#
+
+# additional files not known by setup.py
+
+# configuration
+recursive-include ci *
+recursive-include cloudstack *
+recursive-include packaging *
+
+# omit revision control, python bytecode
+global-exclude  *.pyc *.pyo */.svn/*
