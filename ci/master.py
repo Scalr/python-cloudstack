@@ -30,6 +30,6 @@ c['builders'].append(dict(
 		buildsteps.bump_version(__opts__, setter='cat > cloudstack/version') +
 		buildsteps.source_dist(__opts__) +
 		buildsteps.trigger_packaging(__opts__) + 
-		buildsteps.to_repo(__opts__, types=["deb", "rpm"])
+		buildsteps.to_repo(__opts__, types=["deb", "rpm"], all_repos=True)
 	)
 ))
