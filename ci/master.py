@@ -26,8 +26,10 @@ c['builders'].append(dict(
 	name='{0} source'.format(project),
 	slavenames=['ubuntu1004'],
 	factory=BuildFactory(steps=
-		buildsteps.svn(__opts__) +
-		buildsteps.bump_version(__opts__, setter='cat > cloudstack/version') +
+		buildsteps.git(__opts__) +
+                buildsteps.bump_version_for_git(__opts__, setter='cat > cloudstack/version') +
+		#buildsteps.svn(__opts__) +
+		#buildsteps.bump_version(__opts__, setter='cat > cloudstack/version') +
 		buildsteps.source_dist(__opts__) +
 		buildsteps.trigger_packaging(__opts__) + 
 		buildsteps.to_repo(__opts__, types=["deb", "rpm"], all_repos=True)
