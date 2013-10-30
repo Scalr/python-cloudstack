@@ -7,6 +7,7 @@
 recursive-include ci *
 recursive-include cloudstack *
 recursive-include packaging *
+include README.rst
 
 # omit revision control, python bytecode
 global-exclude  *.pyc *.pyo */.svn/*
