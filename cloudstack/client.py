@@ -1547,3 +1547,8 @@ class Client(BaseClient):
 			self.__execute__('listEventTypes',
 			{'domainid':domainId, 'account':account, 'resourcetype':resourceType}),
 			_class)
+
+	def disableStaticNat(self, ipAddressId, _class=DataObject):
+		return self.process_async('disableStaticNat',
+			{'ipaddressid': ipAddressId},
+			_class)
