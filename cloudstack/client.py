@@ -898,7 +898,7 @@ class Client(BaseClient):
 			self.__execute__('listVirtualMachines',
 			{'account': account, 'domainid': domainId,
 			'forvirtualnetwork':forVirtualNetwork, 'groupid':groupId,
-			'hsotid': hostId, 'hypervisor':hypervisor, 'id': id,
+			'hostid': hostId, 'hypervisor':hypervisor, 'id': id,
 			'isrecursive':isRecursive, 'keyword': keyword, 'name':name,
 			'networkid':networkId, 'page':page, 'pagesize':pageSize, 'podid': podId,
 			'state':state,'storageid':storageId, 'zoneid': zoneId}),
@@ -927,7 +927,7 @@ class Client(BaseClient):
 		podId=None, type=None, virtualMachineId=None, zoneId=None)'''
 		return self.process_list('listvolumesresponse>volume',
 			self.__execute__('listVolumes',
-			{'account': account, 'domainid': domainId, 'hsotid': hostId, 'id': id,
+			{'account': account, 'domainid': domainId, 'hostid': hostId, 'id': id,
 			'isrecursive':isRecursive, 'keyword': keyword, 'name':name, 'page':page,
 			'pagesize':pageSize, 'podid':podId, 'type':type,
 			'virtualmachineid':virtualMachineId, 'zoneid': zoneId}),
