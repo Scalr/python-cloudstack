@@ -67,7 +67,9 @@ class BaseClient(object):
                     base_url, query_string = url.split('?')
                     msg = '&'.join(sorted([s.lower() for s in
                         query_string.split('&')]))
-
+                    
+                    msg = msg.replace('+','%20')
+                    
                     logging.debug('unsignedRequest: %s' % msg)
 
                     signature = base64.b64encode(
