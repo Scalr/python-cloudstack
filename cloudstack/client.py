@@ -545,13 +545,13 @@ class Client(BaseClient):
 
 
 	def listDiskOfferings(self, domainId=None,  id=None, name=None, keyword=None,
-		page=None, pageSize=None, _class=DataObject):
+		listall=False, page=None, pageSize=None, _class=DataObject):
 		'''listDiskOfferings(domainId=None,  id=None, name=None, keyword=None,
 		page=None, pageSize=None)'''
 		return self.process_list('listdiskofferingsresponse>diskoffering',
 			self.__execute__('listDiskOfferings',
 			{'domainid':domainId, 'id': id, 'name': name, 'keyword': keyword,
-			'page':page, 'pagesize':pageSize}),
+			'listall': listall, 'page': page, 'pagesize': pageSize}),
 			_class)
 
 	def listDomainChildren(self, id=None, isRecursive=None, name=None, keyword=None,
