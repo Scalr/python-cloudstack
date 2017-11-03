@@ -1,5 +1,5 @@
-from baseclient import *
-from data_types import *
+from .baseclient import *
+from .data_types import *
 
 
 class Client(BaseClient):

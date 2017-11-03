@@ -1,6 +1,6 @@
 import logging
 
-from dataobject import DataObject, expect_single
+from .dataobject import DataObject, expect_single
 
 
 __all__ = ['Account', 'VirtualMachine', 'User', 'VMSTATE']

@@ -11,6 +11,7 @@ setup(
     description='Cloud.com Cloudstack API client',
     packages=find_packages(),
     install_requires=[
+        'six'
     ],
     include_package_data=True,
     classifiers=[

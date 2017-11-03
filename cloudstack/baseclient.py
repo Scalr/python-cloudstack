@@ -1,6 +1,5 @@
 
-import urllib2
-import urllib
+from six.moves import urllib
 import hashlib
 import json
 import time
@@ -10,8 +9,8 @@ import logging
 import hmac
 import base64
 
-from cloud_exceptions import CloudException
-from dataobject import *
+from .cloud_exceptions import CloudException
+from .dataobject import *
 import sys
 
 
@@ -47,9 +46,9 @@ class BaseClient(object):
             self.url = self.url[:-1]
 
         if self.use_login:
-            self.caller = urllib2.build_opener(
-                urllib2.HTTPCookieProcessor())
-            urllib2.install_opener(self.caller)
+            self.caller = urllib.request.build_opener(
+                urllib.request.HTTPCookieProcessor())
+            urllib.request.install_opener(self.caller)
             #Will throw error if login fails.
             self.login_response = self.__execute__('login', {
                 'username': self.username,
@@ -83,7 +82,7 @@ class BaseClient(object):
 
                     logging.debug('Calling API: %s' % url)
 
-                    return urllib2.urlopen(url, **kwargs)
+                    return urllib.request.urlopen(url, **kwargs)
 
             self.caller = SignatureCaller(secretKey)
             self.is_connected = True
@@ -155,7 +154,7 @@ class BaseClient(object):
 
             return json.loads(self.caller.open(
                 self.url + '?' + urllib.urlencode(params)).read())
-        except urllib2.HTTPError, e:
+        except urllib.error.HTTPError as e:
             raise CloudException(e)
 
     def process_async(self, command, kwargs, _class=DataObject):
