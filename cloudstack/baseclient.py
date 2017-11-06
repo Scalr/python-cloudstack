@@ -153,7 +153,7 @@ class BaseClient(object):
                         job.jobresultcode, job.jobresult))
 
             return json.loads(self.caller.open(
-                self.url + '?' + urllib.parse.urlencode(params)).read())
+                self.url + '?' + urllib.parse.urlencode(params)).read().decode())
         except urllib.error.HTTPError as e:
             raise CloudException(e)
 
