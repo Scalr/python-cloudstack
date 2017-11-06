@@ -125,7 +125,7 @@ class BaseClient(object):
                 logger.debug('Command is asynchronous')
                 jobid = self.process(command.lower() + 'response',
                     json.loads(self.caller.open(
-                    self.url + '?' + urllib.parse.urlencode(params)).read())).jobid
+                    self.url + '?' + urllib.parse.urlencode(params)).read().decode())).jobid
                 logger.debug('Async jobid: %s' % jobid)
 
                 while True: 
