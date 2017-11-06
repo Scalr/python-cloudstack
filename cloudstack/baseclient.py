@@ -78,7 +78,7 @@ class BaseClient(object):
                     logging.debug('Signature: %s' % signature)
 
                     url = '%s?%s&signature=%s' % (base_url,
-                        query_string, urllib.quote(signature))
+                        query_string, urllib.parse.quote(signature))
 
                     logging.debug('Calling API: %s' % url)
 
@@ -125,7 +125,7 @@ class BaseClient(object):
                 logger.debug('Command is asynchronous')
                 jobid = self.process(command.lower() + 'response',
                     json.loads(self.caller.open(
-                    self.url + '?' + urllib.urlencode(params)).read())).jobid
+                    self.url + '?' + urllib.parse.urlencode(params)).read())).jobid
                 logger.debug('Async jobid: %s' % jobid)
 
                 while True: 
@@ -153,7 +153,7 @@ class BaseClient(object):
                         job.jobresultcode, job.jobresult))
 
             return json.loads(self.caller.open(
-                self.url + '?' + urllib.urlencode(params)).read())
+                self.url + '?' + urllib.parse.urlencode(params)).read())
         except urllib.error.HTTPError as e:
             raise CloudException(e)
 
