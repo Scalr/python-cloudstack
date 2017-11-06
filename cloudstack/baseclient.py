@@ -72,7 +72,7 @@ class BaseClient(object):
                     logging.debug('unsignedRequest: %s' % msg)
 
                     signature = base64.b64encode(
-                        hmac.new(self.secretKey,
+                        hmac.new(self.secretKey.encode(),
                         msg=msg, digestmod=hashlib.sha1).digest())
 
                     logging.debug('Signature: %s' % signature)
