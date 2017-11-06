@@ -163,7 +163,7 @@ class BaseClient(object):
             command, str(kwargs)))
         data = self.__execute__(command, kwargs, True)
         if data['queryasyncjobresultresponse']['jobresulttype'] == u'object':
-            obj = data['queryasyncjobresultresponse']['jobresult'].values()[0]
+            obj = list(data['queryasyncjobresultresponse']['jobresult'].values())[0]
             '''
             [v[0] for (k, v)
                 in data['queryasyncjobresultresponse'].items()

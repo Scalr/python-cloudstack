@@ -12,7 +12,7 @@ class CloudException(Exception):
 		except KeyError:
 			response = http_exc.fp.read()
 			try:
-				message = json.loads(response).values()[0]['errortext']
+				message = list(json.loads(response).values())[0]['errortext']
 			except ValueError:
 				message = response
 		Exception.__init__(self,  message)
